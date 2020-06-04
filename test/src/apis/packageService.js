@@ -14,5 +14,18 @@ export const packageService ={
         } else {
             throw Error(response)
         }
+    },
+    async sendPackageServ(){
+        const response = await fetch(`${API_URL}/packages`,{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            }
+        })
+        if(response.ok){
+            return response.json()
+        }else{
+            throw Error(response)
+        }
     }
 }

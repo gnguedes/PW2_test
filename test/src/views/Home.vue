@@ -21,8 +21,12 @@
         <input type="text" id="startPack" class="form-control" v-model="startPack" />
       </p>
       <p>
-        <label for="finishPack">Peso:</label>
+        <label for="finishPack">Destino:</label>
         <input type="number" id="finishPack" class="form-control" v-model="finishPack" />
+      </p>
+      <p>
+        <label for="weightPack">Peso:</label>
+        <input type="text" id="weightPack" class="form-control" v-model="weightPack" />
       </p>
       <p>
         <label for="valuePack">Valor:</label>
@@ -38,6 +42,7 @@
 <script>
 // @ is an alias to /src
 import { mapGetters } from "vuex";
+import API_URL from "../apis/config.js";
 
 export default {
   name: "Home",
@@ -50,29 +55,56 @@ export default {
       startPack: "",
       finishPack: "",
       valuePack: "",
-      idPack:"",
+      idPack: "",
+      loadingPack: false,
     };
   },
-  computed:{
+  computed: {
     ...mapGetters(["getPackages"])
   },
-  methods:{
-    async getMyPackages(){
-      try{
-        await this.$store.dispatch("fetchPack")
-        this.packages = this.getPackages
-      }catch(err){
-        alert(err)
+  methods: {
+    async getMyPackages() {
+      this.loadingPack = true
+      try {
+        await this.$store.dispatch("fetchPack");
+        this.packages = this.getPackages;
+      } catch (err) {
+        alert(err);
       }
     },
-    getLastId(){
-
+    getLastId() {
+      if (this.packages.length) {
+        return this.packages[this.packages.length - 1].id;
+      } else {
+        return 0;
+      }
     },
-
+    addPack() {
+      this.calcTaxes();
+      fetch(`${API_URL}/ packages`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: this.getLastId() + 1,
+          type: this.typePack,
+          weight: this.weightPack,
+          sizePack: this.sizePack,
+          startPack: this.startPack,
+          finishPack: this.finishPack,
+          valuePack: this.valuePack
+        })
+      });
+    },
+    calcTaxes() {
+      if (this.valuePack >= 46) {
+        return this.valuePack * 0.23 + this.valuePack;
+      }
+    }
   },
-  created(){
+  mounted() {
     this.getMyPackages();
   }
-
 };
 </script>

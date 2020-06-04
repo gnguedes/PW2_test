@@ -1,12 +1,16 @@
 <template>
   <div class="home">
-    <select name id v-model="selectedBreed">
+    <select>
       <option v-for="pack in packages" :key="pack.id" :value="pack.id">
         <table>
           <tr>
             <th>ID:{{pack.id}}</th>
             <th>Type:{{pack.typePack}}</th>
-            <th>Weight:{{pack.weight}}</th>
+            <th>Weight:{{pack.weightPack}}</th>
+            <th>Size:{{pack.sizePack}}</th>
+            <th>Start:{{pack.startPack}}</th>
+            <th>Finish:{{pack.finishPack}}</th>
+            <th>Value:{{pack.valuePack}}</th>
           </tr>
         </table>
       </option>
@@ -31,8 +35,8 @@ export default {
   methods: {
     async getMyPackages() {
       try {
-        await this.$$store.dispatch("fetchPack");
-        this.packages = this.getMyPackages;
+        await this.$store.dispatch("fetchPack");
+        this.packages = this.getPackages;
       } catch (err) {
         alert(err);
       }

@@ -14,12 +14,12 @@ export default new Vuex.Store({
   mutations: {
     setNewPackage(state, payload){
       state.packages = payload
-    }
+    },
   },
   actions: {
     async fetchPack({ commit }) {
       commit("setNewPackage", await packageService.getPackageServ())
-    }
+    },
   },
   
 });
