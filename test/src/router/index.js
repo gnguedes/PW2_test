@@ -1,7 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import About from "../views/About.vue"
+import About from "../views/About.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
 
 Vue.use(VueRouter);
 
@@ -16,6 +18,16 @@ const routes = [
     name: "packages",
     component: About
     
+  },
+  {
+    path: "/register",
+    name: "register",
+    component : Register
+  },
+  {
+    path: "/login",
+    name: "login",
+    component : Login
   }
 ];
 

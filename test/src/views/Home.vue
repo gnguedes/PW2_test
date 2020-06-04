@@ -56,7 +56,6 @@ export default {
       finishPack: "",
       valuePack: "",
       idPack: "",
-      loadingPack: false,
     };
   },
   computed: {
@@ -64,7 +63,6 @@ export default {
   },
   methods: {
     async getMyPackages() {
-      this.loadingPack = true
       try {
         await this.$store.dispatch("fetchPack");
         this.packages = this.getPackages;

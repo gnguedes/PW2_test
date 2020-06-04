@@ -7,9 +7,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     packages: [],
+    users:[]
   },
   getters:{
     getPackages: state => state.packages,
+    getUsers: state => state.users,
   },
   mutations: {
     setNewPackage(state, payload){
