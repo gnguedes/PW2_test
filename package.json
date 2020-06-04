@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/gnguedes/PW2_test/issues"
   },
-  "homepage": "https://github.com/gnguedes/PW2_test#readme"
+  "homepage": "https://github.com/gnguedes/PW2_test#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
